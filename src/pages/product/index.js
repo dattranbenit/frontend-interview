@@ -34,6 +34,9 @@ function Products(props) {
   React.useEffect(() => {
     getProducts()
   }, [])
+  React.useEffect(() => {
+    console.log( JSON.parse(products), "cds")
+  }, [products])
   const columns = [
     {
       title: "Name",
@@ -64,27 +67,29 @@ function Products(props) {
     <>
       <Card>
         <CardContent className={classes.card}>
-          <MaterialTable
-            title={null}
-            data={products}
-            columns={columns}
-            options={{
-              paging: false,
-              search: true,
-              sorting: true,
-            }}
-            icons={{
-              SortArrow: React.forwardRef((props, ref) => (
-                <UnfoldMoreIcon className={classes.arrowIcon}/>
-              )),
-              Search: React.forwardRef((props, ref) => (
-                <SearchIcon className={classes.arrowIcon}/>
-              )),
-              ResetSearch: React.forwardRef((props, ref) => (
-                <></>
-              )),
-            }}
-          />
+          {JSON.parse(products).length > 0 && (
+            <MaterialTable
+              title={null}
+              data={JSON.parse(products)}
+              columns={columns}
+              options={{
+                paging: false,
+                search: true,
+                sorting: true,
+              }}
+              icons={{
+                SortArrow: React.forwardRef((props, ref) => (
+                  <UnfoldMoreIcon className={classes.arrowIcon}/>
+                )),
+                Search: React.forwardRef((props, ref) => (
+                  <SearchIcon className={classes.arrowIcon}/>
+                )),
+                ResetSearch: React.forwardRef((props, ref) => (
+                  <></>
+                )),
+              }}
+            />
+          )}
           <Button className={classes.button} onClick={setOpenBookProduct}>
             Books
           </Button>

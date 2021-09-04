@@ -1,5 +1,6 @@
 import { ActionTypes } from "./productConstants";
 import {products} from "./products";
+import { useIndexedDB } from 'react-indexed-db';
 import React from "react";
 
 const initialState = {
@@ -13,12 +14,12 @@ const initialState = {
   openReturnPrice: false
 };
 
-const productsReducer = (state = initialState, action) => {
+const ProductsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.GET_PRODUCTS: {
       return {
         ...state,
-        products: products
+        products: action.payload
       }
     }
     case ActionTypes.CANCEL_PRODUCT: {
@@ -81,5 +82,5 @@ const productsReducer = (state = initialState, action) => {
   }
 };
 
-export default productsReducer;
+export const productsReducer = ProductsReducer;
 
